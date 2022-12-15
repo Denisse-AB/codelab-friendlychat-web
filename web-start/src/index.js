@@ -43,7 +43,7 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 import { getMessaging, getToken, onMessage } from 'firebase/messaging';
-import { getPerformance } from 'firebase/performance';
+import { getPerformance, trace } from 'firebase/performance';
 
 import { getFirebaseConfig } from './firebase-config.js';
 
@@ -135,6 +135,21 @@ async function saveImageMessage(file) {
       timestamp: serverTimestamp()
     });
 
+    // Create custom trace to monitor image upload.
+    const t = trace(perf, "saveImageMessage");
+
+    // Record image size.
+    t.putMetric('imageSize', file.size);
+
+    // Record image MIME type.
+    t.putAttribute('imageType', file.type);
+
+    // TODO: Start the "timer" for the custom trace.
+    t.start();
+
+
+    // TODO: Stop the "timer" for the custom trace.
+    t.stop();
     // 2 - Upload the image to Cloud Storage.
     const filePath = `${getAuth().currentUser.uid}/${messageRef.id}/${file.name}`;
     const newImageRef = ref(getStorage(), filePath);
