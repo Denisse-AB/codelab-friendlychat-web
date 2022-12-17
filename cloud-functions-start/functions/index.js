@@ -15,8 +15,8 @@
  */
  
 /*
- Attention: cd to the functions folder and run firebase deploy --only functions --project friendlychat-b7cf
- to deploy only the functions, Blaze plan is required to run cloud functions!!!
+ * NOTE: cd to the functions folder and run firebase deploy --only functions --project friendlychat-b7cf
+ * Blaze plan is required!!!
  */
 const Vision = require('@google-cloud/vision');
 const vision = new Vision.ImageAnnotatorClient();

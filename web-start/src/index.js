@@ -144,11 +144,11 @@ async function saveImageMessage(file) {
     // Record image MIME type.
     t.putAttribute('imageType', file.type);
 
-    // TODO: Start the "timer" for the custom trace.
+    // Start the "timer" for the custom trace.
     t.start();
 
 
-    // TODO: Stop the "timer" for the custom trace.
+    // Stop the "timer" for the custom trace.
     t.stop();
     // 2 - Upload the image to Cloud Storage.
     const filePath = `${getAuth().currentUser.uid}/${messageRef.id}/${file.name}`;
